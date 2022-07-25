@@ -1,0 +1,2 @@
+# pymaze
+Python Maze Generator
