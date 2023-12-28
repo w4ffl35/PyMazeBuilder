@@ -1,6 +1,6 @@
 # Python Maze Generator
 
-Generate perfect mazes with Node using a growing tree algorithm.
+Generate perfect mazes with Node using a growing tree algorithm. This is a python clone of (node-maze-generator)[https://github.com/w4ffl35/node-maze-generator].
 
     █████████████████████
     █░░░░░░░░░█░░░░░░░░██
