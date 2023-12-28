@@ -54,27 +54,25 @@ Generated data structure
 
 ## Quick use
 
-    const nmg = require('node-maze-generator');
-    const generator = new nmg.generators.maze({}, {width: 10, height: 10});
-    const renderer = new nmg.renderer(generator);
+    from pymaze.generators.generator import Generator
+    from pymaze.generators.maze import MazeGenerator
+    from pymaze.renderer import Renderer
+    Renderer(Generator([
+        {
+            'generator': MazeGenerator,
+            'options': {
+                'width': 10,
+                'height': 10,
+                'floors': 1
+            }
+        },
+    ]))
 
 ---
 
 ## Random
 
-`utils.py` contains a custom pseudo-random seed generator static class called `Random`. Seeed the Random class with
-an integer before generating the maze in order to generate consistent data.
-
-```
-const nmg = require('node-maze-generator');
-const Random = nmg.utils.Random;
-
-const SEED = 42;
-Random.seed(SEED);    // Initialize random
-Random.range(0, 10);  // Get a number within range
-Random.next();        // Get random integer
-
-```
+`utils.py` contains a random class which handles all random number generation and can be seeded.
 
 ---
 
