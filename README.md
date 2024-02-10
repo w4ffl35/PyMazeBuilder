@@ -54,9 +54,9 @@ Generated data structure
 
 ## Quick use
 
-    from pymaze.generators.generator import Generator
-    from pymaze.generators.maze import MazeGenerator
-    from pymaze.renderer import Renderer
+    from pymazebuilder.generators.generator import Generator
+    from pymazebuilder.generators.maze import MazeGenerator
+    from pymazebuilder.renderer import Renderer
     Renderer(Generator([
         {
             'generator': MazeGenerator,
