@@ -1,6 +1,6 @@
 # PyMazeBuilder
 
-Generate perfect mazes with Node using a growing tree algorithm. This is a python clone of [node-maze-generator](https://github.com/w4ffl35/node-maze-generator).
+Generate perfect mazes with Python using a growing tree algorithm.
 
 ---
 
@@ -12,76 +12,81 @@ pip install pymazebuilder
 
 ---
 
+```bash
+█████████████████████
+█░░░░░░░░░█░░░░░░░░██
+██░░░░░░░░█░█████░███
+█░░░░░░░░░░░█░░██░░░█
+█░░░░░░░░░█░█░█████░█
+█░░░░░░░░░█░░░█░░░█░█
+█░░░░░░░░░█████░█░█░█
+███░░░░██░░░░░░░█░░░█
+███░███████████████░█
+█░░░█░░░░░█░░░░░░░░░█
+█░███░███░█░█████████
+█░█░░░███░█░█░░░░░░░█
+█░█░███░█░█░█░█████░█
+█░█░██░░█░█░░░█░░██░█
+█░█░██░░█░█████░███░█
+█░░░█░░░░░░░█░░░░░█░█
+█░███░░░░░░░█░███░█░█
+█░██░░█░░░░░█░█░░░█░█
+█░███░█░█████░█░███░█
+█░░░░░█░░░░░░░█░░░░░█
+█████████████████████
+```
 
-    █████████████████████
-    █░░░░░░░░░█░░░░░░░░██
-    ██░░░░░░░░█░█████░███
-    █░░░░░░░░░░░█░░██░░░█
-    █░░░░░░░░░█░█░█████░█
-    █░░░░░░░░░█░░░█░░░█░█
-    █░░░░░░░░░█████░█░█░█
-    ███░░░░██░░░░░░░█░░░█
-    ███░███████████████░█
-    █░░░█░░░░░█░░░░░░░░░█
-    █░███░███░█░█████████
-    █░█░░░███░█░█░░░░░░░█
-    █░█░███░█░█░█░█████░█
-    █░█░██░░█░█░░░█░░██░█
-    █░█░██░░█░█████░███░█
-    █░░░█░░░░░░░█░░░░░█░█
-    █░███░░░░░░░█░███░█░█
-    █░██░░█░░░░░█░█░░░█░█
-    █░███░█░█████░█░███░█
-    █░░░░░█░░░░░░░█░░░░░█
-    █████████████████████
-        
 Generated data structure
 
-        {
-            grid: [
-              [
-                Cell {
-                  x: 0,
-                  y: 0,
-                  exits: [],
-                  blocked: true,
-                  displayed: false,
-                  visited: false
-                },
-                ...
-              ]
-            ]
-            rooms: [
-                Room {
-                    x: 0,
-                    y: 0,
-                    width: 0,
-                    height: 0
-                }
-            ]
-        }
+```python
+    {
+        grid: [
+          [
+            Cell {
+              x: 0,
+              y: 0,
+              exits: [],
+              blocked: true,
+              displayed: false,
+              visited: false
+            },
+            ...
+          ]
+        ]
+        rooms: [
+            Room {
+                x: 0,
+                y: 0,
+                width: 0,
+                height: 0
+            }
+        ]
+    }
+```
 
 ---
 
 ## Quick use
 
-    from pymazebuilder.generators.generator import Generator
-    from pymazebuilder.generators.maze import MazeGenerator
-    from pymazebuilder.renderer import Renderer
-    Renderer(Generator([
-        {
-            'generator': MazeGenerator,
-            'options': {
-                'width': 10,
-                'height': 10,
-                'floors': 1
-            }
-        },
-    ]))
+```python
+from pymazebuilder.generators.generator import Generator
+from pymazebuilder.generators.maze import MazeGenerator
+from pymazebuilder.renderer import Renderer
+Renderer(Generator([
+    {
+        'generator': MazeGenerator,
+        'options': {
+            'width': 10,
+            'height': 10,
+            'floors': 1
+        }
+    },
+]))
+```
 
 ---
 
-## Random
+## Randomization
 
 `utils.py` contains a random class which handles all random number generation and can be seeded.
 
@@ -93,13 +98,15 @@ Generator classes can be passed as an optional array of objects to the maze gene
 
 The shape of this data structure is as follows:
 
-        [
-            {
-                generator: <generator class>,
-                options: <options object>
-            },
-            ...
-        ]
+```python
+[
+    {
+        generator: <generator class>,
+        options: <options object>
+    },
+    ...
+]
+```
 
 `Generator` (`src/pymaze/generator.py`) will iterate over each generator class and instantiate it.
 
@@ -109,28 +116,33 @@ The following example shows how to generate a maze with rooms using the provided
 
 (also see `src/pymaze/main.py`)
 
-    from pymazebuilder.generators.generator import Generator
-    Generator([
-        {
-            'generator': MazeGenerator,
-            'options': {
-                ...
-            }
-        },
-        {
-            'generator': RoomGenerator,
-            'options': {
-                ...
-            }
-        },
-        {
-            'generator': StairsGenerator,
-            'options': {
-                ...
-            }
+```python
+from pymazebuilder.generators.generator import Generator
+from pymazebuilder.generators.renderer import Renderer
+
+Generator([
+    {
+        'generator': MazeGenerator,
+        'options': {
+            ...
         }
-    ])
-    Renderer(generator)
+    },
+    {
+        'generator': RoomGenerator,
+        'options': {
+            ...
+        }
+    },
+    {
+        'generator': StairsGenerator,
+        'options': {
+            ...
+        }
+    }
+])
+
+Renderer(generator)
+```
 
 #### Multi-floor maze
 
@@ -138,67 +150,71 @@ Use the `floors` option to generate a multi-floor maze.
 
 Use the `src/generators/stairs.py` generator to connect the floors with stairs.
 
-    Floor 0
-    █████████████████████
-    █░██░░░░░██░░░░░░░░░█
-    █░███░█░███░░░░░█░█░█
-    █░░░█░█░░░░░█░░░█░█░█
-    ███▼█░█░█████████░█░█
-    █░░░█░█░░░█░░░░░█░███
-    █░███░███░█░███░█░███
-    █░█░░░░██░█░█░░░█░░░█
-    █░█░█████░█░█░█░█░░░█
-    █░█░░░░░█░███░█░█░░░█
-    █░█░░██░█░███░█░█░░░█
-    █░█░░░█░█░░░░░█░░░█░█
-    █░███░█░███░░░░░█░█░█
-    █░██░░█░░░░░░░█░░░█░█
-    █░███████████░█░███░█
-    █░░░█░░░█░░░█░░░█░░░█
-    ███░█░█░█░█░█████░█░█
-    ███░░░█░█░█░░░░░░░█░█
-    █░█████░█░███░░░░░█░█
-    █░░░░░░░░░██░░░░░░░░█
-    █████████████████████
-    Floor 1
-    █████████████████████
-    █░░░░░░░░░█░░░░░░░░██
-    ██░░░░░░░░█░█████░███
-    █░░░░░░░░░░░█░░██░░░█
-    █░░▲░░░░░░█░█░█████░█
-    █░░░░░░░░░█░░░█░░░█░█
-    █░░░░░░░░░█████░█░█░█
-    ███░░░░██░░░░░░░█░░░█
-    ███░███████████████░█
-    █░░░█░░░░░█░░░░░░░░░█
-    █░███░███░█░█████████
-    █░█░░░███░█░█░░░░░░░█
-    █░█░███░█░█░█░█████░█
-    █░█░██░░█░█░░░█░░██░█
-    █░█░██░░█░█████░███░█
-    █░░░█░░░░░░░█░░░░░█░█
-    █░███░░░░░░░█░███░█░█
-    █░██░░█░░░░░█░█░░░█░█
-    █░███░█░█████░█░███░█
-    █░░░░░█░░░░░░░█░░░░░█
-    █████████████████████
+```bash
+Floor 0
+█████████████████████
+█░██░░░░░██░░░░░░░░░█
+█░███░█░███░░░░░█░█░█
+█░░░█░█░░░░░█░░░█░█░█
+███▼█░█░█████████░█░█
+█░░░█░█░░░█░░░░░█░███
+█░███░███░█░███░█░███
+█░█░░░░██░█░█░░░█░░░█
+█░█░█████░█░█░█░█░░░█
+█░█░░░░░█░███░█░█░░░█
+█░█░░██░█░███░█░█░░░█
+█░█░░░█░█░░░░░█░░░█░█
+█░███░█░███░░░░░█░█░█
+█░██░░█░░░░░░░█░░░█░█
+█░███████████░█░███░█
+█░░░█░░░█░░░█░░░█░░░█
+███░█░█░█░█░█████░█░█
+███░░░█░█░█░░░░░░░█░█
+█░█████░█░███░░░░░█░█
+█░░░░░░░░░██░░░░░░░░█
+█████████████████████
+Floor 1
+█████████████████████
+█░░░░░░░░░█░░░░░░░░██
+██░░░░░░░░█░█████░███
+█░░░░░░░░░░░█░░██░░░█
+█░░▲░░░░░░█░█░█████░█
+█░░░░░░░░░█░░░█░░░█░█
+█░░░░░░░░░█████░█░█░█
+███░░░░██░░░░░░░█░░░█
+███░███████████████░█
+█░░░█░░░░░█░░░░░░░░░█
+█░███░███░█░█████████
+█░█░░░███░█░█░░░░░░░█
+█░█░███░█░█░█░█████░█
+█░█░██░░█░█░░░█░░██░█
+█░█░██░░█░█████░███░█
+█░░░█░░░░░░░█░░░░░█░█
+█░███░░░░░░░█░███░█░█
+█░██░░█░░░░░█░█░░░█░█
+█░███░█░█████░█░███░█
+█░░░░░█░░░░░░░█░░░░░█
+█████████████████████
 
-    ▲ = stairs going up
-    ▼ = stairs going down
-    █ = wall
-    ░ = floor
-
+▲ = stairs going up
+▼ = stairs going down
+█ = wall
+░ = floor
+```
 
 ---
 
 #### Custom generator classes
 
 Custom generators should match the following pattern.
-    class SomeGenerator:
-        def __init__(data: dict, options: dict):
-            # do something with the data object
-            self.data = data
-            self.data["some_property] = "some value"
+
+```python
+class SomeGenerator:
+    def __init__(data: dict, options: dict):
+        # do something with the data object
+        self.data = data
+        self.data["some_property"] = "some value"
+```
 
 See `src/pymaze/room.py` and `src/pymaze/maze.py` for complete examples along with a list of optional arguments that each class takes.
     
