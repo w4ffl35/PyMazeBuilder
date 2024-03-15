@@ -1,8 +1,13 @@
 class StairsGenerator:
-    def __init__(self, data, options):
+    def __init__(
+        self,
+        data=None,
+        ascending=False,
+        max_stairs=1
+    ):
         self.data = data or {}
-        self.options = options or {'ascending': False}
-        self.max_stairs = options.get('max_stairs', 1)
+        self.ascending = ascending
+        self.max_stairs = max_stairs
         self.generate()
 
     def generate(self):
@@ -30,11 +35,11 @@ class StairsGenerator:
 
                 cell.stairs = {
                     'next_floor': next_floor_cell,
-                    'direction': 'up' if self.options['ascending'] else 'down'
+                    'direction': 'up' if self.ascending else 'down'
                 }
                 if next_floor_cell:
                     next_floor_cell.stairs = {
                         'previous_floor': cell,
-                        'direction': 'down' if self.options['ascending'] else 'up'
+                        'direction': 'down' if self.ascending else 'up'
                     }
                 total_stairs_by_floor[floor] = total_stairs_by_floor.get(floor, 0) + 1

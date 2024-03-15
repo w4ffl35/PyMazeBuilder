@@ -7,6 +7,7 @@ MIN_BOUNDARY = -1
 MIN_NEIGHBOR_BOUNDARY = 0
 MIN_FLOORS = 1
 
+
 class Grid:
     def __init__(self, options):
         self.width = int(options.get('width') or MIN_WIDTH)

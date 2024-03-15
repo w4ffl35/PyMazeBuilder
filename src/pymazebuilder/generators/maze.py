@@ -1,22 +1,35 @@
-from grid import Grid
-from utils import Random
+from pymazebuilder.grid import Grid
+from pymazebuilder.utils import Random
 
 
 class MazeGenerator:
-    def __init__(self, data, options):
+    def __init__(
+        self,
+        data=None,
+        neighbor_positions=None,
+        grid_class=Grid,
+        width=None,
+        height=None,
+        floors=None,
+        cell_class=None,
+        start_x=None,
+        start_y=None,
+        start_z=None,
+        min_rooms=None,
+        max_rooms=None,
+    ):
         self.data = data or {}
-        self.options = options
-        self.neighbor_positions = options.get('neighbor_positions', [[0, -2], [0, 2], [-2, 0], [2, 0]])
+        self.neighbor_positions = neighbor_positions or [[0, -2], [0, 2], [-2, 0], [2, 0]]
         self.start_cell_coord = {'x': 1, 'y': 1}
-        GridClass = options.get('grid_class', Grid)
+        GridClass = grid_class
         self.data['grid'] = GridClass({
-            'width': options.get('width'),
-            'height': options.get('height'),
-            'total_floors': options.get('floors'),
-            'cell_class': options.get('cell_class'),
-            'start_x': options.get('start_x'),
-            'start_y': options.get('start_y'),
-            'start_z': options.get('start_z'),
+            'width': width,
+            'height': height,
+            'total_floors': floors,
+            'cell_class': cell_class,
+            'start_x': start_x,
+            'start_y': start_y,
+            'start_z': start_z,
             'floors': []
         })
         self.generate()

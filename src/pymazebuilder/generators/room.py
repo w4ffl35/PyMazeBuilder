@@ -1,29 +1,39 @@
-from utils import Random
+from pymazebuilder.utils import Random
+
 
 class RoomGenerator:
-    def __init__(self, data, options):
-        self.options = options
+    def __init__(
+        self,
+        data=None,
+        min_rooms=1,
+        max_rooms=8,
+        min_room_width=1,
+        min_room_height=1,
+        max_room_width=8,
+        max_room_height=8,
+        total_rooms=None
+    ):
         self.data = data or {}
         self.data['rooms'] = []
-        minRooms = int(options.get('minRooms', 1))
-        maxRooms = int(options.get('maxRooms', 8))
-        self.minRoomWidth = int(options.get('minRoomWidth', 1))
-        self.minRoomHeight = int(options.get('minRoomHeight', 1))
-        self.maxRoomWidth = int(options.get('maxRoomWidth', 8))
-        self.maxRoomHeight = int(options.get('maxRoomHeight', 8))
-        self.totalRooms = options.get('totalRooms', Random.range(minRooms, maxRooms))
+        self.min_rooms = min_rooms
+        self.max_rooms = max_rooms
+        self.min_room_width = min_room_width
+        self.min_room_height = min_room_height
+        self.max_room_width = max_room_width
+        self.max_room_height = max_room_height
+        self.totalRooms = total_rooms or Random.range(self.min_rooms, self.max_rooms)
         self.generate()
 
     def generate(self):
         for z in range(self.data['grid'].total_floors):
             for i in range(self.totalRooms):
-                roomWidth = Random.range(self.minRoomWidth, self.maxRoomWidth)
-                roomHeight = Random.range(self.minRoomHeight, self.maxRoomHeight)
+                room_width = Random.range(self.min_room_width, self.max_room_width)
+                room_height = Random.range(self.min_room_height, self.max_room_height)
                 room = {
-                    'x': Random.range(0, self.data['grid'].width - roomWidth),
-                    'y': Random.range(0, self.data['grid'].height - roomHeight),
-                    'width': roomWidth,
-                    'height': roomHeight
+                    'x': Random.range(0, self.data['grid'].width - room_width),
+                    'y': Random.range(0, self.data['grid'].height - room_height),
+                    'width': room_width,
+                    'height': room_height
                 }
                 for y in range(room['y'], room['y'] + room['height']):
                     for x in range(room['x'], room['x'] + room['width']):

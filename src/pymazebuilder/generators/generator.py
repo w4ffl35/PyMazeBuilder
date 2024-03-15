@@ -6,7 +6,10 @@ class Generator:
         self.data = {}
         self.generators = []
         for generator in generators:
-            generator_instance = generator['generator'](self.data, generator['options'])
+            generator_instance = generator['generator'](
+                data=self.data,
+                **generator['options']
+            )
             self.generators.append(generator_instance)
             self.data = generator_instance.data
 

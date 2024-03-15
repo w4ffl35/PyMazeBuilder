@@ -30,12 +30,12 @@ Renderer(Generator([
     {
         'generator': RoomGenerator,
         'options': {
-            'minRooms': MIN_ROOMS,
-            'maxRooms': MAX_ROOMS,
-            'minRoomWidth': MIN_ROOM_WIDTH,
-            'minRoomHeight': MIN_ROOM_HEIGHT,
-            'maxRoomWidth': MAX_ROOM_WIDTH,
-            'maxRoomHeight': MAX_ROOM_HEIGHT
+            'min_rooms': MIN_ROOMS,
+            'max_rooms': MAX_ROOMS,
+            'min_room_width': MIN_ROOM_WIDTH,
+            'min_room_height': MIN_ROOM_HEIGHT,
+            'max_room_width': MAX_ROOM_WIDTH,
+            'max_room_height': MAX_ROOM_HEIGHT
         }
     },
     {
