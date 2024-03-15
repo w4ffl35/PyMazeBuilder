@@ -1,9 +1,9 @@
-from pymaze.generators.generator import Generator
-from pymaze.generators.maze import MazeGenerator
-from pymaze.renderer import Renderer
-from pymaze.generators.room import RoomGenerator
-from pymaze.generators.stairs import StairsGenerator
-from pymaze.utils import Random
+from pymazebuilder.generators.generator import Generator
+from pymazebuilder.generators.maze import MazeGenerator
+from pymazebuilder.renderer import Renderer
+from pymazebuilder.generators.room import RoomGenerator
+from pymazebuilder.generators.stairs import StairsGenerator
+from pymazebuilder.utils import Random
 
 SEED = 100
 WIDTH = 21

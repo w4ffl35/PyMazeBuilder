@@ -98,7 +98,7 @@ The following example shows how to generate a maze with rooms using the provided
 
 (also see `src/pymaze/main.py`)
 
-    from pymaze.generators.generator import Generator
+    from pymazebuilder.generators.generator import Generator
     Generator([
         {
             'generator': MazeGenerator,

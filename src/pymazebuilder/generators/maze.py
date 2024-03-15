@@ -1,6 +1,7 @@
 from grid import Grid
 from utils import Random
 
+
 class MazeGenerator:
     def __init__(self, data, options):
         self.data = data or {}

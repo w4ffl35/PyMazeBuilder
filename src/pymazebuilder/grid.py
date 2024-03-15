@@ -1,5 +1,5 @@
-from cell import Cell
-from utils import Random
+from pymazebuilder.cell import Cell
+from pymazebuilder.utils import Random
 
 MIN_WIDTH = 5
 MIN_HEIGHT = 5
