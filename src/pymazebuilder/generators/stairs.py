@@ -26,11 +26,11 @@ class StairsGenerator:
 
                 if floor > 0:
                     previous_floor_cell = self.data['grid'].cells[floor - 1][cell.y][cell.x]
-                    if previous_floor_cell.blocked:
+                    if previous_floor_cell.blocked or previous_floor_cell.stairs:
                         previous_floor_cell = None
 
                 next_floor_cell = self.data['grid'].cells[floor + 1][cell.y][cell.x]
-                if next_floor_cell is None or next_floor_cell.blocked:
+                if next_floor_cell is None or next_floor_cell.blocked or next_floor_cell.stairs:
                     continue
 
                 cell.stairs = {
