@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pymazebuilder',
-    version='1.2.0',
+    version='1.2.1',
     author="w4ffl35",
     description="RPG",
     long_description=open(
