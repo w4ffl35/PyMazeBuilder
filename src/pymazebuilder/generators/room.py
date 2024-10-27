@@ -37,6 +37,6 @@ class RoomGenerator:
                 }
                 for y in range(room['y'], room['y'] + room['height']):
                     for x in range(room['x'], room['x'] + room['width']):
-                        if self.data['grid'].isInNavigationBounds(x, y):
-                            self.data['grid'].unblockCell(x, y, z)
+                        if self.data['grid'].is_in_navigation_bounds(x, y):
+                            self.data['grid'].unblock_cell(x, y, z)
                 self.data['rooms'].append(room)

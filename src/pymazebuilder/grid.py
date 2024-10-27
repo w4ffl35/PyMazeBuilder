@@ -49,23 +49,23 @@ class Grid:
                 for x in range(self.start_x, self.width):
                     self.cells[z][y].append(self.CellClass(x, y, z))
 
-    def randomCell(self, z):
+    def random_cell(self, z):
         x = Random.range(MIN_NEIGHBOR_BOUNDARY, self.width - 2)
         y = Random.range(MIN_NEIGHBOR_BOUNDARY, self.height - 2)
-        return self.getCell(x, y, z)
+        return self.get_cell(x, y, z)
 
-    def isInBounds(self, x, y):
+    def is_in_bounds(self, x, y):
         return x < self.width and x > MIN_BOUNDARY and y < self.height and y > MIN_BOUNDARY
 
-    def isInNavigationBounds(self, x, y):
+    def is_in_navigation_bounds(self, x, y):
         return x < self.width - 1 and x > MIN_NEIGHBOR_BOUNDARY and y < self.height - 1 and y > MIN_NEIGHBOR_BOUNDARY
 
-    def getCell(self, x, y, z):
-        return self.cells[z][y][x] if self.isInBounds(x, y) else None
+    def get_cell(self, x, y, z) -> Cell:
+        return self.cells[z][y][x] if self.is_in_bounds(x, y) else None
 
-    def getNeighborCell(self, x, y, z):
-        return self.cells[z][y][x] if self.isInNavigationBounds(x, y) else None
+    def get_neighbor_cell(self, x, y, z):
+        return self.cells[z][y][x] if self.is_in_navigation_bounds(x, y) else None
 
-    def unblockCell(self, x, y, z):
-        if self.isInBounds(x, y):
+    def unblock_cell(self, x, y, z):
+        if self.is_in_bounds(x, y):
             self.cells[z][y][x].blocked = False

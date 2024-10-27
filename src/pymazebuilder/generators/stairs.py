@@ -20,7 +20,7 @@ class StairsGenerator:
                 previous_floor_cell = None
                 next_floor_cell = None
 
-                cell = self.data['grid'].randomCell(floor)
+                cell = self.data['grid'].random_cell(floor)
                 if cell.blocked:
                     continue
 

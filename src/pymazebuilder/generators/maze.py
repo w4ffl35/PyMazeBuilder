@@ -34,12 +34,12 @@ class MazeGenerator:
         })
         self.generate()
 
-    def getNeighborCells(self, cell):
+    def get_neighbor_cells(self, cell):
         neighbor_cells = []
         for i in range(4):
             nx = cell.x + self.neighbor_positions[i][0]
             ny = cell.y + self.neighbor_positions[i][1]
-            neighbor_cell = self.data['grid'].getNeighborCell(nx, ny, cell.z)
+            neighbor_cell = self.data['grid'].get_neighbor_cell(nx, ny, cell.z)
             if neighbor_cell and not neighbor_cell.visited and neighbor_cell.blocked:
                 neighbor_cells.append(neighbor_cell)
         return neighbor_cells
@@ -50,11 +50,11 @@ class MazeGenerator:
             y = self.start_cell_coord['y']
             get_cell = True
             prev_cells = []
-            current_cell = self.data['grid'].getCell(x, y, z)
+            current_cell = self.data['grid'].get_cell(x, y, z)
 
             while get_cell:
                 current_cell.visited = True
-                neighbor_cells = self.getNeighborCells(current_cell)
+                neighbor_cells = self.get_neighbor_cells(current_cell)
                 if len(neighbor_cells) > 0:
                     neighbor_cell = neighbor_cells[Random.range(0, len(neighbor_cells))]
                     n_x = current_cell.x
@@ -67,7 +67,7 @@ class MazeGenerator:
                         n_y += 1
                     elif neighbor_cell.y < current_cell.y:
                         n_y -= 1
-                    new_cell = self.data['grid'].getCell(n_x, n_y, z)
+                    new_cell = self.data['grid'].get_cell(n_x, n_y, z)
                     new_cell.blocked = False
                     current_cell.blocked = False
                     prev_cells.append(current_cell)
