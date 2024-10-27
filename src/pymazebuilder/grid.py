@@ -61,7 +61,10 @@ class Grid:
         return x < self.width - 1 and x > MIN_NEIGHBOR_BOUNDARY and y < self.height - 1 and y > MIN_NEIGHBOR_BOUNDARY
 
     def get_cell(self, x, y, z) -> Cell:
-        return self.cells[z][y][x] if self.is_in_bounds(x, y) else None
+        cell = self.cells[z][y][x] if self.is_in_bounds(x, y) else None
+        if cell == []:
+            return None
+        return cell
 
     def get_neighbor_cell(self, x, y, z):
         return self.cells[z][y][x] if self.is_in_navigation_bounds(x, y) else None
