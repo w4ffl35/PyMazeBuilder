@@ -23,7 +23,5 @@ setup(
         ],
     },
     install_requires=[
-        "pygame==2.6.1",
-        "Twisted==24.7.0",
     ],
 )
