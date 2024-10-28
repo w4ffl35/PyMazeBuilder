@@ -22,5 +22,7 @@ setup(
             'pymazebuilder=pymazebuilder.src.pymazebuilder.main:main',
         ],
     },
-    install_requires=[],
+    install_requires=[
+        "pygame==2.6.1"
+    ],
 )
