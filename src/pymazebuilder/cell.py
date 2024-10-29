@@ -16,3 +16,10 @@ class Cell:
             visited=self.visited,
             stairs=self.stairs["next_floor"].to_dict() if self.stairs and "next_floor" in self.stairs else None
         )
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        cell = cls(data['x'], data['y'], data['z'], data['visited'])
+        cell.blocked = data['blocked']
+        cell.stairs = data['stairs']
+        return cell

@@ -1,5 +1,3 @@
-from typing import Any
-
 from pymazebuilder.cell import Cell
 from pymazebuilder.utils import Random
 
@@ -26,7 +24,9 @@ class Grid:
         if self.start_y > self.height - 1: self.start_y = self.start_y - 1
         if self.start_z >= self.total_floors: self.start_z = self.total_floors - 1
         self.floors = []
-        self.initialize()
+        self.cells = options.get("cells", None)
+        if not self.cells:
+            self.initialize()
     
     def to_dict(self):
         return {
@@ -40,6 +40,23 @@ class Grid:
             'floors': self.floors,
             'cells': [[[cell.to_dict() for cell in row] for row in floor] for floor in self.cells]
         }
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        grid = cls({
+            'width': data['width'],
+            'height': data['height'],
+            'total_floors': data['total_floors'],
+            'start_x': data['start_x'],
+            'start_y': data['start_y'],
+            'start_z': data['start_z'],
+            'currentFloor': data['currentFloor'],
+            'floors': data['floors'],
+            'cells': data['cells'],
+            'cell_class': data['cell_class']
+        })
+        grid.cells = [[[data['cell_class'].from_dict(cell) for cell in row] for row in floor] for floor in data['cells']]
+        return grid
 
     def initialize(self):
         self.cells = []
