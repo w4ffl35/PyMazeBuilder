@@ -9,7 +9,6 @@ class GeneratorManager:
         self.data = {}
         self.generators = []
         for generator in generators:
-            print(generator["options"])
             generator_instance = generator['generator'](
                 data=self.data,
                 **generator['options']
