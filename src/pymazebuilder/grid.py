@@ -1,3 +1,5 @@
+from typing import Any
+
 from pymazebuilder.cell import Cell
 from pymazebuilder.utils import Random
 

@@ -3,9 +3,17 @@ class Cell:
         self.x = x
         self.y = y
         self.z = z
-        self.blocked = True
+        self._blocked = True
         self.visited = visited
         self.stairs = None
+
+    @property
+    def blocked(self) -> bool:
+        return self._blocked
+
+    @blocked.setter
+    def blocked(self, value: bool):
+        self._blocked = value
     
     def to_dict(self):
         return dict(

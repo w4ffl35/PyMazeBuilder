@@ -1,3 +1,5 @@
+import argparse
+from pymazebuilder.generators.dungeon import DungeonGenerator
 from pymazebuilder.generators.generator import Generator
 from pymazebuilder.generators.maze import MazeGenerator
 from pymazebuilder.renderer import Renderer
@@ -6,40 +8,59 @@ from pymazebuilder.generators.stairs import StairsGenerator
 from pymazebuilder.utils import Random
 
 SEED = 100
-WIDTH = 21
-HEIGHT = 21
-FLOORS = 2
-MIN_ROOMS = 1
-MAX_ROOMS = 8
-MIN_ROOM_WIDTH = 1
-MIN_ROOM_HEIGHT = 1
-MAX_ROOM_WIDTH = 8
-MAX_ROOM_HEIGHT = 8
 
-Random.seed(SEED)
+def main():
+    parser = argparse.ArgumentParser(description='Generate a maze or a dungeon.')
+    parser.add_argument('--dungeon', action='store_true', help='Generate a dungeon')
+    parser.add_argument('--width', type=int, default=21, help='Width of the grid')
+    parser.add_argument('--height', type=int, default=21, help='Height of the grid')
+    parser.add_argument('--floors', type=int, default=2, help='Number of floors')
+    parser.add_argument('--min_rooms', type=int, default=1, help='Minimum number of rooms')
+    parser.add_argument('--max_rooms', type=int, default=8, help='Maximum number of rooms')
+    parser.add_argument('--min_room_width', type=int, default=1, help='Minimum room width')
+    parser.add_argument('--min_room_height', type=int, default=1, help='Minimum room height')
+    parser.add_argument('--max_room_width', type=int, default=8, help='Maximum room width')
+    parser.add_argument('--max_room_height', type=int, default=8, help='Maximum room height')
+    args = parser.parse_args()
 
-Renderer(Generator([
-    {
-        'generator': MazeGenerator,
-        'options': {
-            'width': WIDTH,
-            'height': HEIGHT,
-            'floors': FLOORS
-        }
-    },
-    {
-        'generator': RoomGenerator,
-        'options': {
-            'min_rooms': MIN_ROOMS,
-            'max_rooms': MAX_ROOMS,
-            'min_room_width': MIN_ROOM_WIDTH,
-            'min_room_height': MIN_ROOM_HEIGHT,
-            'max_room_width': MAX_ROOM_WIDTH,
-            'max_room_height': MAX_ROOM_HEIGHT
-        }
-    },
-    {
-        'generator': StairsGenerator,
-        'options': {}
-    }
-]))
+    Random.seed(SEED)
+
+    if args.dungeon:
+        Renderer(Generator([
+            {
+                'generator': DungeonGenerator,
+                'options': {
+                    'width': args.width,
+                    'height': args.height,
+                    'floors': args.floors,
+                    'min_rooms': args.min_rooms,
+                    'max_rooms': args.max_rooms,
+                    "min_room_width": args.min_room_width,
+                    "min_room_height": args.min_room_height,
+                    "max_room_width": args.max_room_width,
+                    "max_room_height": args.max_room_height
+                }
+            },
+            {
+                'generator': StairsGenerator,
+                'options': {}
+            }
+        ]))
+    else:
+        Renderer(Generator([
+            {
+                'generator': MazeGenerator,
+                'options': {
+                    'width': args.width,
+                    'height': args.height,
+                    'floors': args.floors
+                }
+            },
+            {
+                'generator': StairsGenerator,
+                'options': {}
+            }
+        ]))
+
+if __name__ == '__main__':
+    main()

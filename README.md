@@ -68,11 +68,27 @@ Generated data structure
 
 ## Quick use
 
+### Example
+
+Generate a maze
+
+```bash
+python main.py --maze
+```
+
+Generate a dungeon
+
+```bash
+python main.py --dungeon
+```
+
+The built-in renderer is a simple ASCII renderer which prints the maze to the console.
+
 ```python
 from pymazebuilder.generators.generator import Generator
 from pymazebuilder.generators.maze import MazeGenerator
 from pymazebuilder.renderer import Renderer
-Renderer(Generator([
+data = Generator([
     {
         'generator': MazeGenerator,
         'options': {
@@ -81,7 +97,8 @@ Renderer(Generator([
             'floors': 1
         }
     },
-]))
+])
+Renderer(data)
 ```
 
 ---
