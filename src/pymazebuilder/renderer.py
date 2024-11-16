@@ -1,9 +1,11 @@
+from pymazebuilder.generators.generator_manager import GeneratorManager
+
 class Renderer:
-    def __init__(self, generator):
-        self.generator = generator
+    def __init__(self, generator:GeneratorManager):
+        self.generator:GeneratorManager = generator
         self.do_render()
     
-    def do_render(self, generator=None):
+    def do_render(self, generator:GeneratorManager=None):
         generator = self.generator if not generator else generator
         for z in range(generator.data['grid'].total_floors):
             print(f"Floor {z}")

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 
 from pymazebuilder.cell import Cell
 from pymazebuilder.utils import Random
@@ -11,22 +11,34 @@ MIN_FLOORS = 1
 
 
 class Grid:
-    def __init__(self, options):
-        self.width = int(options.get('width') or MIN_WIDTH)
-        self.height = int(options.get('height') or MIN_HEIGHT)
-        self.total_floors = int(options.get('total_floors') or MIN_FLOORS)
-        self.start_x = int(options.get('start_x') or 0)
-        self.start_y = int(options.get('start_y') or 0)
-        self.start_z = int(options.get('start_z') or 0)
-        self.CellClass = options.get('cell_class') or Cell
-        self.currentFloor = options.get('currentFloor', 0)
+    def __init__(
+        self,
+        width:Optional[int]=None,
+        height:Optional[int]=None,
+        total_floors:Optional[int]=None,
+        start_x:Optional[int]=None,
+        start_y:Optional[int]=None,
+        start_z:Optional[int]=None,
+        cell_class=None,
+        current_floor:Optional[int]=None,
+        cells:Optional[list]=None,
+        floors:Optional[list]=None
+    ):
+        self.width = width or MIN_WIDTH
+        self.height = height or MIN_HEIGHT
+        self.total_floors = total_floors or MIN_FLOORS
+        self.start_x = start_x or 0
+        self.start_y = start_y or 0
+        self.start_z = start_z or 0
+        self.CellClass = cell_class or Cell
+        self.current_floor = current_floor or 0
         if self.width <= MIN_WIDTH: self.width = MIN_WIDTH
         if self.height <= MIN_HEIGHT: self.height = MIN_HEIGHT
         if self.start_x > self.width - 1: self.start_x = self.start_x - 1
         if self.start_y > self.height - 1: self.start_y = self.start_y - 1
         if self.start_z >= self.total_floors: self.start_z = self.total_floors - 1
-        self.floors = []
-        self.cells = options.get("cells", None)
+        self.floors = floors or []
+        self.cells = cells
         if not self.cells:
             self.initialize()
     
@@ -38,25 +50,23 @@ class Grid:
             'start_x': self.start_x,
             'start_y': self.start_y,
             'start_z': self.start_z,
-            'currentFloor': self.currentFloor,
+            'currentFloor': self.current_floor,
             'floors': self.floors,
             'cells': [[[cell.to_dict() for cell in row] for row in floor] for floor in self.cells]
         }
 
     @classmethod
     def from_dict(cls, data: dict):
-        grid = cls({
-            'width': data['width'],
-            'height': data['height'],
-            'total_floors': data['total_floors'],
-            'start_x': data['start_x'],
-            'start_y': data['start_y'],
-            'start_z': data['start_z'],
-            'currentFloor': data['currentFloor'],
-            'floors': data['floors'],
-            'cells': data['cells'],
-            'cell_class': data['cell_class']
-        })
+        grid = cls(
+            width=data['width'],
+            height=data['height'],
+            total_floors=data['total_floors'],
+            start_x=data['start_x'],
+            start_y=data['start_y'],
+            start_z=data['start_z'],
+            current_floor=data['currentFloor'],
+            cell_class=data['cell_class']
+        )
         grid.cells = [[[data['cell_class'].from_dict(cell) for cell in row] for row in floor] for floor in data['cells']]
         return grid
 

@@ -1,37 +1,43 @@
+from typing import Optional
+
+from pymazebuilder.cell import Cell
+from pymazebuilder.generators.generator import Generator
 from pymazebuilder.grid import Grid
 from pymazebuilder.utils import Random
 
 
-class MazeGenerator:
+class MazeGenerator(Generator):
     def __init__(
         self,
-        data=None,
+        data:Optional[dict]=None,
         neighbor_positions=None,
-        grid_class=Grid,
-        width=None,
-        height=None,
-        floors=None,
-        cell_class=None,
-        start_x=None,
-        start_y=None,
-        start_z=None,
-        min_rooms=None,
-        max_rooms=None,
+        grid_class:type=Grid,
+        width:Optional[int]=None,
+        height:Optional[int]=None,
+        floors:Optional[int]=None,
+        cell_class:type=Cell,
+        start_x:Optional[int]=None,
+        start_y:Optional[int]=None,
+        start_z:Optional[int]=None,
+        min_rooms:Optional[int]=None,
+        max_rooms:Optional[int]=None,
+        *args,
+        **kwargs
     ):
+        super().__init__(*args, **kwargs)
         self.data = data or {}
         self.neighbor_positions = neighbor_positions or [[0, -2], [0, 2], [-2, 0], [2, 0]]
         self.start_cell_coord = {'x': 1, 'y': 1}
-        GridClass = grid_class
-        self.data['grid'] = GridClass({
-            'width': width,
-            'height': height,
-            'total_floors': floors,
-            'cell_class': cell_class,
-            'start_x': start_x,
-            'start_y': start_y,
-            'start_z': start_z,
-            'floors': []
-        })
+        self.data['grid'] = grid_class(
+            width=width,
+            height=height,
+            total_floors=floors,
+            cell_class=cell_class,
+            start_x=start_x,
+            start_y=start_y,
+            start_z=start_z,
+            floors=[]
+        )
         self.generate()
 
     def get_neighbor_cells(self, cell):

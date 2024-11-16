@@ -73,13 +73,13 @@ Generated data structure
 Generate a maze
 
 ```bash
-python main.py --maze
+python main.py
 ```
 
 Generate a dungeon
 
 ```bash
-python main.py --dungeon
+python main.py --type=dungeon
 ```
 
 The built-in renderer is a simple ASCII renderer which prints the maze to the console.
@@ -217,6 +217,34 @@ Floor 1
 ▼ = stairs going down
 █ = wall
 ░ = floor
+```
+
+---
+
+Dungeon
+
+```bash
+█████████████████████
+█████████████████████
+█░░░░░░░░░░░░░░░░████
+█░░░░██████████░░████
+█░░░░█░░░░░░░░░░░████
+█░░░░░░░░░░░░░█░░████
+██░██████████░█░░████
+██░██████████░█░░████
+██░█████████░░░░░████
+██░█████░░░░░░░██████
+██░░░░░░░░██░░░██████
+██░░██░░░░███████████
+█░░░░░░░░░███████████
+█░░░░░░░░░███████████
+█░░░░░░░░░███████████
+█░░░░░███████████████
+█░░░░░███████████████
+█░░░░░███████████████
+█░░░░░███████████████
+█████████████████████
+█████████████████████
 ```
 
 ---

@@ -1,18 +1,25 @@
+from typing import Optional
+
+from pymazebuilder.generators.generator import Generator
 from pymazebuilder.utils import Random
 
 
-class RoomGenerator:
+class RoomGenerator(Generator):
     def __init__(
         self,
-        data=None,
-        min_rooms=1,
-        max_rooms=8,
-        min_room_width=1,
-        min_room_height=1,
-        max_room_width=8,
-        max_room_height=8,
-        total_rooms=None
+        data:Optional[dict]=None,
+        min_rooms:int=1,
+        max_rooms:int=8,
+        min_room_width:int=1,
+        min_room_height:int=1,
+        max_room_width:int=8,
+        max_room_height:int=8,
+        total_rooms:Optional[int]=None,
+        *args,
+        **kwargs
     ):
+        super().__init__(*args, **kwargs)
+
         self.data = data or {}
         self.data['rooms'] = []
         self.min_rooms = min_rooms

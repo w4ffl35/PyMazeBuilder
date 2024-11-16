@@ -1,9 +1,14 @@
-class StairsGenerator:
+from typing import Optional
+
+from pymazebuilder.generators.generator import Generator
+
+
+class StairsGenerator(Generator):
     def __init__(
         self,
-        data=None,
-        ascending=False,
-        max_stairs=1
+        data:Optional[dict]=None,
+        ascending:bool=False,
+        max_stairs:int=1
     ):
         self.data = data or {}
         self.ascending = ascending
