@@ -58,6 +58,17 @@ def main():
                 }
             },
             {
+                'generator': RoomGenerator,
+                'options': {
+                    'min_rooms': args.min_rooms,
+                    'max_rooms': args.max_rooms,
+                    "min_room_width": args.min_room_width,
+                    "min_room_height": args.min_room_height,
+                    "max_room_width": args.max_room_width,
+                    "max_room_height": args.max_room_height
+                }
+            },
+            {
                 'generator': StairsGenerator,
                 'options': {}
             }
