@@ -22,7 +22,7 @@ class Cell:
             z=self.z,
             blocked=self.blocked,
             visited=self.visited,
-            stairs=self.stairs["next_floor"].to_dict() if self.stairs and "next_floor" in self.stairs else None
+            stairs=self.stairs
         )
 
     @classmethod

@@ -21,13 +21,14 @@ def main():
     parser.add_argument('--min_room_height', type=int, default=1, help='Minimum room height')
     parser.add_argument('--max_room_width', type=int, default=8, help='Maximum room width')
     parser.add_argument('--max_room_height', type=int, default=8, help='Maximum room height')
+    parser.add_argument('--max_stairs', type=int, default=1, help='Max stairs')
     parser.add_argument('--seed', type=int, default=SEED, help='Seed for random number generator')
+    parser.add_argument('--ascending', type=bool, default=False, help='Ascending or descending dungeon / maze')
+    parser.add_argument('--current_floor', type=int, default=0, help='Current floor')
     args = parser.parse_args()
 
-    Random.seed(args.seed)
-
     if args.type == "dungeon":
-        Renderer(GeneratorManager([
+        Renderer(GeneratorManager(seed=args.seed, current_floor=args.current_floor, generators=[
             {
                 'generator': DungeonGenerator,
                 'options': {
@@ -44,11 +45,15 @@ def main():
             },
             {
                 'generator': StairsGenerator,
-                'options': {}
+                'options': {
+                    'ascending': args.ascending,
+                    'max_stairs': args.max_stairs,
+                    'floors': args.floors,
+                }
             }
         ]))
     else:
-        Renderer(GeneratorManager([
+        Renderer(GeneratorManager(seed=args.seed, current_floor=args.current_floor, generators=[
             {
                 'generator': MazeGenerator,
                 'options': {
@@ -70,7 +75,11 @@ def main():
             },
             {
                 'generator': StairsGenerator,
-                'options': {}
+                'options': {
+                    'ascending': args.ascending,
+                    'max_stairs': args.max_stairs,
+                    'floors': args.floors,
+                }
             }
         ]))
 
