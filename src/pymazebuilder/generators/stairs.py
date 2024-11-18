@@ -15,6 +15,7 @@ class StairsGenerator(Generator):
         *args,
         **kwargs
     ):
+        super().__init__(*args, **kwargs)
         self.data = data or {}
         self.ascending = ascending
         self.max_stairs = max_stairs

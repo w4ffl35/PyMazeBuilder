@@ -1,11 +1,11 @@
 import argparse
+
+from pymazebuilder.ascii_renderer import ASCIIRenderer
 from pymazebuilder.generators.dungeon import DungeonGenerator
 from pymazebuilder.generators.generator_manager import GeneratorManager
 from pymazebuilder.generators.maze import MazeGenerator
-from pymazebuilder.renderer import Renderer
 from pymazebuilder.generators.room import RoomGenerator
 from pymazebuilder.generators.stairs import StairsGenerator
-from pymazebuilder.utils import Random
 
 SEED = 100
 
@@ -28,7 +28,7 @@ def main():
     args = parser.parse_args()
 
     if args.type == "dungeon":
-        Renderer(GeneratorManager(seed=args.seed, current_floor=args.current_floor, generators=[
+        ASCIIRenderer(GeneratorManager(seed=args.seed, current_floor=args.current_floor, generators=[
             {
                 'generator': DungeonGenerator,
                 'options': {
@@ -53,7 +53,7 @@ def main():
             }
         ]))
     else:
-        Renderer(GeneratorManager(seed=args.seed, current_floor=args.current_floor, generators=[
+        ASCIIRenderer(GeneratorManager(seed=args.seed, current_floor=args.current_floor, generators=[
             {
                 'generator': MazeGenerator,
                 'options': {

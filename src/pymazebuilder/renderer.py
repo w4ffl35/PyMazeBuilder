@@ -8,10 +8,13 @@ class Renderer:
         self.do_render(generator)
 
     def do_render(self, generator: GeneratorManager = None):
-        for row in self.render(generator):
-            print(row)
+        for row in self.generate(generator):
+            self.render(row)
 
-    def render(self, generator):
+    def render(self, row=None):
+        pass
+
+    def generate(self, generator):
         for y in range(generator.data['grid'].height):
             row = ''
             for x in range(generator.data['grid'].width):
