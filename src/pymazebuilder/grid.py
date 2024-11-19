@@ -42,7 +42,8 @@ class Grid:
             'start_x': self.start_x,
             'start_y': self.start_y,
             'start_z': self.start_z,
-            'cells': [[cell.to_dict() for cell in row] for row in self.cells]
+            'cells': [[cell.to_dict() for cell in row] for row in self.cells],
+            'cell_class': self.CellClass
         }
 
     @classmethod
