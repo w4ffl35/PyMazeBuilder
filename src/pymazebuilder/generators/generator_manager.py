@@ -18,6 +18,7 @@ class GeneratorManager:
             generator_instance = generator['generator'](
                 data=self.data,
                 current_floor=self.current_floor,
+                seed=self.seed,
                 **generator['options']
             )
             self.generators.append(generator_instance)
@@ -56,13 +57,14 @@ class GeneratorManager:
 
     def from_dict(self, data: dict):
         cells = []
+        cell_class = data["grid"]["cell_class"]
         for row in data["grid"]["cells"]:
-            cells.append([Cell.from_dict(cell) for cell in row])
+            cells.append([cell_class.from_dict(cell) for cell in row])
 
         data["grid"] = Grid(
             width=data["grid"]["width"],
             height=data["grid"]["height"],
-            cell_class=Cell,
+            cell_class=data["grid"]["cell_class"],
             start_x=data["grid"]["start_x"],
             start_y=data["grid"]["start_y"],
             start_z=data["grid"]["start_z"],
