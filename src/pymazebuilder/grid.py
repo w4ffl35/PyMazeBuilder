@@ -90,3 +90,34 @@ class Grid:
     def unblock_cell(self, x, y, z):
         if self.is_in_bounds(x, y):
             self.cells[y][x].blocked = False
+
+    def get_neighbors(self, cell):
+        neighbors = []
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                x = cell.x + i
+                y = cell.y + j
+                if self.is_in_bounds(x, y):
+                    neighbor = self.get_cell(x, y, cell.z)
+                    if neighbor and neighbor != cell:
+                        neighbors.append(neighbor)
+        return neighbors
+
+    def get_within_radius(self, cell, radius):
+        neighbors = []
+        for i in range(-radius, radius + 1):
+            for j in range(-radius, radius + 1):
+                x = cell.x + i
+                y = cell.y + j
+                if self.is_in_bounds(x, y):
+                    neighbor = self.get_cell(x, y, cell.z)
+                    if neighbor and neighbor != cell:
+                        neighbors.append(neighbor)
+        return neighbors
+
+    def get_within_bounds(self, cell, width, height):
+        neighbors = []
+        for x in range(0, width):
+            for y in range(0, height):
+                neighbors.append(self.get_cell(cell.x + x, cell.y + y, cell.z))
+        return neighbors
