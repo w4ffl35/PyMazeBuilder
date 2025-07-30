@@ -115,19 +115,18 @@ python main.py --type=dungeon
 The built-in renderer is a simple ASCII renderer which prints the maze to the console.
 
 ```python
-from pymazebuilder.generators.generator import Generator
+from pymazebuilder.generators.generator_manager import GeneratorManager
 from pymazebuilder.generators.maze import MazeGenerator
 from pymazebuilder.renderer import Renderer
-data = Generator([
-    {
-        'generator': MazeGenerator,
-        'options': {
-            'width': 10,
-            'height': 10,
-            'floors': 1
-        }
-    },
-])
+data = GeneratorManager(
+    [
+        {
+            "generator": MazeGenerator,
+            "options": {"width": 10, "height": 10, "floors": 1},
+        },
+    ]
+)
+data.generate()
 Renderer(data)
 ```
 
